@@ -11,9 +11,10 @@ class LoginController extends Controller
 {
     
     public function store(){
-        if (Auth::check()) {
+        if (Auth::guard('sanctum')->check()) {
             return response()->json(['message' => 'Access denied for authenticated users.'], 403);
         }
+       
         request()->validate([
             'otp'=> ['min:4','max:4'],
             'number'=>['min:9','max:10',new Isnumber()]

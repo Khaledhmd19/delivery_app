@@ -10,7 +10,7 @@ use App\Models\User;
 class RegisterController extends Controller
 {
     public function store(){
-        if (Auth::check()) {
+        if (Auth::guard('sanctum')->check()) {
             return response()->json(['message' => 'Access denied for authenticated users.'], 403);
         }
         request()->validate([
@@ -65,9 +65,10 @@ class RegisterController extends Controller
     }
 
     public function update(){
-        if (Auth::check()) {
+        if (Auth::guard('sanctum')->check()) {
             return response()->json(['message' => 'Access denied for authenticated users.'], 403);
         }
+
         request()->validate([
             'number' =>['min:9','max:10',new Isnumber()],
             'first_name' => ['required'],
@@ -107,9 +108,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
         $token = $user->createToken('auth_token')->plainTextToken;
-        if(!Auth::guest()){
-            echo "hello";
-        }
         return response()->json([
             'token'=> $token,
             'user' => $user

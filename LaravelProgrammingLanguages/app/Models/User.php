@@ -29,12 +29,17 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
     
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
     public function ordersToDeliver(){
         if($this->role == 'driver'){
             return $this->hasMany(Order::class,'driver_id');
         }
         return collect();
     }
+
+
     
 
 }
