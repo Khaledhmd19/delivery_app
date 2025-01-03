@@ -15,9 +15,7 @@ class Product extends Model
         return $this->belongsToMany(User::class,'favorites');
     }
     
-    public function inCartBy(){
-        return $this->belongsToMany(User::class,'cart');
-    }
+   
     public function orders(){
         return $this->belongsToMany(Order::class);
     }
