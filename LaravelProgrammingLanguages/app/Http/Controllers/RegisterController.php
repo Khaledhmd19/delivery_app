@@ -14,7 +14,7 @@ class RegisterController extends Controller
             return response()->json(['message' => 'Access denied for authenticated users.'], 403);
         }
         request()->validate([
-            'number'=>['min:9' , 'max:10' ,new Isnumber()]  
+            'number'=>['required','min:9' , 'max:10' ,new Isnumber()]  
         ]);
         $number = request('number');
         if(strlen($number)==10){
@@ -70,7 +70,7 @@ class RegisterController extends Controller
         }
 
         request()->validate([
-            'number' =>['min:9','max:10',new Isnumber()],
+            'number' =>['required','min:9','max:10',new Isnumber()],
             'first_name' => ['required'],
             'last_name'=>['required'],
             'location' => ['required'],
@@ -85,14 +85,12 @@ class RegisterController extends Controller
         if(!$user){
             return response()->json([
                 'verified'=>false,
-                'time'=>false,
                 'message' => 'Number is not correct'
             ],400);
         }
         if($user->otp != request('otp')){
             return response()->json([
                 'verified'=>false,
-                'time'=>true,
                 'message' => 'Invalid credentials'
             ],401);
         }

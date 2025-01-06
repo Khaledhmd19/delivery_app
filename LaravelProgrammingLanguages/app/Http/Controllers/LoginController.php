@@ -16,8 +16,8 @@ class LoginController extends Controller
         }
        
         request()->validate([
-            'otp'=> ['min:4','max:4'],
-            'number'=>['min:9','max:10',new Isnumber()]
+            'otp'=> ['required','min:4','max:4'],
+            'number'=>['required','min:9','max:10',new Isnumber()]
         ]);
         $number = request('number');
         if(strlen($number)==10){
@@ -29,7 +29,7 @@ class LoginController extends Controller
         if(!$user){
             return response()->json([
                 'verified'=>false,
-                'time'=>false,
+                'time'=>true,
                 'message' => 'Number is not correct'
             ],400);
         }
@@ -44,7 +44,7 @@ class LoginController extends Controller
             return response()->json([
                 'verified'=>false,
                 'time'=>true,
-                'message' => 'Invalid credentials'
+                'message' => 'Invalid Otp'
             ],401);
         }else{
             if($user->first_name!=null){
@@ -52,12 +52,14 @@ class LoginController extends Controller
                 
                 $token = $user->createToken('auth_token')->plainTextToken;
                 return response()->json([
+                    'verified'=>true,
                      'is_new'=>false,
                      'token'=> $token,
                      'user' => $user
                  ]);
                }else{
                 return response()->json([
+                    'verified'=>true,
                     'is_new' =>true
                 ],200);
             }

@@ -16,5 +16,9 @@ class Category extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
 
 }

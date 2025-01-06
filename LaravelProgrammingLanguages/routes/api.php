@@ -1,19 +1,27 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StoreController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-//Send number without +963
+//Login and Register
 Route::post('/otp-request', [RegisterController::class,'store']);
-//Send number and otp 
 Route::post('/otp-verification',[LoginController::class,'store']);
-//Send number,otp and user information (first_name,last_name,location,image path if exists)
-Route::patch('/register',[RegisterController::class,'update']);
-
-//logout send token 
+Route::post('/register',[RegisterController::class,'update']);
+Route::middleware('auth:sanctum')->get('/categories',[CategoryController::class,'index']);
+Route::middleware('auth:sanctum')->post('/categories',[CategoryController::class,'store']);
 Route::middleware('auth:sanctum')->post('/logout',[LoginController::class,'destory']);
 
+//Home page
+Route::middleware('auth:sanctum')->get('/stores',[StoreController::class,'index']);
+Route::middleware('auth:sanctum')->get('/stores/{id}/products',[ProductController::class,'index']);
+Route::middleware('auth:sanctum')->get('/stores/{id1}/products/{id2}',[ProductController::class,'show']);
 
-
+//Search page
+Route::middleware('auth:sanctum')->get('/search/stores',[StoreController::class,'search']);
+Route::middleware('auth:sanctum')->get('/search/products',[ProductController::class,'search']);
