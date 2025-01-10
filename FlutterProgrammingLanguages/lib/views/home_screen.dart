@@ -9,7 +9,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:delivery_app/controllers/home_controller.dart'; // Import the controller
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   final String userLocation = 'Current Location';
 
