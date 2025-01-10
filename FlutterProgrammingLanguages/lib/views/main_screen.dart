@@ -1,7 +1,7 @@
 import 'package:delivery_app/views/cart_screen.dart';
+import 'package:delivery_app/views/driver_orders_screen.dart';
 import 'package:delivery_app/views/home_screen.dart';
-import 'package:delivery_app/views/orders_screen.dart';
-import 'package:delivery_app/views/profile_screen.dart';
+import 'package:delivery_app/views/account_screen.dart';
 import 'package:delivery_app/views/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,8 +20,8 @@ class MainScreen extends StatelessWidget {
       HomeScreen(),
       SearchScreen(),
       CartScreen(),
-      ProfileScreen(),
-      OrdersScreen(),
+      AccountScreen(),
+      DriverOrdersScreen(),
     ];
 
     return Scaffold(

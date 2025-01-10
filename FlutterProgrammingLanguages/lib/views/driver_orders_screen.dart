@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+class DriverOrdersScreen extends StatelessWidget {
+  const DriverOrdersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xffffffff),
         title: Text(
-          'Find What You Like',
+          'Available Orders',
           style: GoogleFonts.poppins(
             color: Color(0xff323232),
             fontWeight: FontWeight.bold,

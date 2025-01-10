@@ -33,25 +33,38 @@ class FavoritesScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    ProductCard(),
-                  ],
-                );
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 16,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      ProductCard(),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-          MainButton(
-            buttonText: 'Add All To Cart',
-            buttonSize: Size(360, 40),
-          )
-        ],
+            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 80),
+              child: MainButton(
+                onPressed: () {},
+                buttonText: 'Add All To Cart',
+                buttonSize: Size(320, 50),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

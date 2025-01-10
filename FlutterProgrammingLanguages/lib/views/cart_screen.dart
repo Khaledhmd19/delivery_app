@@ -71,30 +71,33 @@ class CartScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 MainButton(
+                  onPressed: () {},
                   buttonText: 'Checkout',
                   buttonSize: Size(270, 50),
                 ),
                 const SizedBox(width: 4),
-                Obx(() => Column(
-                      children: [
-                        Text(
-                          'Total',
-                          style: GoogleFonts.poppins(
-                            color: Color(0xff323232),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
+                Obx(
+                  () => Column(
+                    children: [
+                      Text(
+                        'Total',
+                        style: GoogleFonts.poppins(
+                          color: Color(0xff323232),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Text(
-                          '\$${controller.totalAmount.value}',
-                          style: GoogleFonts.poppins(
-                            color: Color(0xffFF8D4D),
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      ),
+                      Text(
+                        '\$${controller.totalAmount.value}',
+                        style: GoogleFonts.poppins(
+                          color: Color(0xffFF8D4D),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
                         ),
-                      ],
-                    ))
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           )
