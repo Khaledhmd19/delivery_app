@@ -1,4 +1,6 @@
+import 'package:delivery_app/views/store_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StoreCard extends StatelessWidget {
@@ -10,7 +12,9 @@ class StoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(StoreScreen());
+      },
       child: Container(
         height: 140,
         width: double.infinity,
@@ -39,7 +43,6 @@ class StoreCard extends StatelessWidget {
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
-                  
                 ),
               ),
             ),

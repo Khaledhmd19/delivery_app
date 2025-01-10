@@ -49,7 +49,7 @@ class AccountScreen extends StatelessWidget {
   }
 
   static void _navigateToPaymentCard() {
-    // Get.to(CreditCardInformationScreen());
+    Get.to(CreditCardInformationScreen());
   }
 
   static void _navigateToContactUs() {}
