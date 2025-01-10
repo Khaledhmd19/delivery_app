@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:delivery_app/controllers/home_controller.dart'; // Import the controller
+import 'package:delivery_app/controllers/home_controller.dart'; 
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

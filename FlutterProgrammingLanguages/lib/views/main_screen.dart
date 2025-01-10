@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:get/get.dart';
-import 'package:delivery_app/controllers/main_controller.dart';
+import 'package:delivery_app/controllers/main_screen_controller.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final MainController controller = Get.put(MainController());
+    final MainScreenController controller = Get.put(MainScreenController());
 
     final List<Widget> pages = [
       HomeScreen(),

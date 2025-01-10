@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
 class LocationPickerScreen extends StatelessWidget {
-  LocationPickerScreen({Key? key}) : super(key: key);
+  LocationPickerScreen({super.key});
 
   final LocationPickerController controller =
       Get.put(LocationPickerController());
