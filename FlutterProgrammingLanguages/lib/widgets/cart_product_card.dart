@@ -1,4 +1,6 @@
+import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartProductCard extends StatefulWidget {
   const CartProductCard({super.key});
@@ -16,7 +18,9 @@ class _ProductCardState extends State<CartProductCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => ProductDetailsScreen());
+      },
       child: Dismissible(
         key: UniqueKey(),
         direction: DismissDirection.horizontal,

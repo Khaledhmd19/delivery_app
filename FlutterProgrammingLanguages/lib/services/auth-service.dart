@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:delivery_app/main.dart';
-import 'package:delivery_app/model/userModel.dart';
+import 'package:delivery_app/models/userModel.dart';
 import 'package:dio/dio.dart';
 
 String token = '';

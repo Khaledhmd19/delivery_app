@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:delivery_app/main.dart';
-import 'package:delivery_app/model/userModel.dart';
+import 'package:delivery_app/models/userModel.dart';
 import 'package:delivery_app/services/auth-service.dart';
 import 'package:delivery_app/views/favorites-screen.dart';
 import 'package:flutter/material.dart';

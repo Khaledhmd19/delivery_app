@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:delivery_app/main.dart';
-import 'package:delivery_app/model/storeModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
 import 'package:dio/dio.dart';
 
 class ShowStore {

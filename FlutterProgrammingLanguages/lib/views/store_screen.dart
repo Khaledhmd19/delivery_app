@@ -35,12 +35,55 @@ class StoreScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 12,
-          horizontal: 16,
+          horizontal: 24,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'ksdagf asdkghksa gaskjghsakd ghks ksagh ksdag skad gsa gskadg hsdkjg skdaghksadhg gskadg hsdkjg skdaghksadhg.',
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color(0xffB2B2B2),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Location',
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff323232),
+              ),
+            ),
+            Text(
+              'Store, Location',
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color(0xffB2B2B2),
+              ),
+            ),
+            const SizedBox(height: 24),
+            // Text(
+            //   'Description',
+            //   style: GoogleFonts.poppins(
+            //     fontSize: 16,
+            //     fontWeight: FontWeight.w500,
+            //     color: Color(0xff323232),
+            //   ),
+            // ),
+            Text(
+              'Products',
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff323232),
+              ),
+            ),
+            const SizedBox(height: 6),
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
