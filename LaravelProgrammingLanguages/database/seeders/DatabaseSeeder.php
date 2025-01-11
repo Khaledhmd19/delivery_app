@@ -22,20 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Store::factory(10)->create([
-            'title' => fake()->title(),
-            'description' =>fake()->text(50),
-            'location'=> fake()->text(50)
-        ]);
-        Product::factory(10)->create([
-            'name'=>fake()->name(),
-            'description'=>fake()->text(50),
-            'image'=>'33',
-            'price'=>443,
-            'stock'=> random_int(100,200),
-            'store_id'=>random_int(1,6),
-            'category_id'=>random_int(1,3)
-        ]);
-
+        Store::factory(5)->create();
+        Product::factory(20)->create();
     }
 }

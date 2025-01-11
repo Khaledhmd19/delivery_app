@@ -23,7 +23,7 @@ class CategoryController extends Controller
             ],401);
         }
         $categories = request()->all();
-            
+        
         foreach($categories as $category){
             $user->categories()->attach($category['id']);
         }
