@@ -96,7 +96,12 @@ class RegisterController extends Controller
         }
 
 
-
+        if($user->first_name != null){
+            return response()->json([
+                'verified'=>false,
+                'message' => 'This number is already registerd.'
+            ],401);
+        }
 
         $user->update([
             'first_name'=>request('first_name'),

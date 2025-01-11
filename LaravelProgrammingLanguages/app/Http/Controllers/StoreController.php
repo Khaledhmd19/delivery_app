@@ -11,22 +11,10 @@ class StoreController extends Controller
 {
     //
     public function index(){
-        $user=Auth::user();
-        $user->load('categories');
-        $count =0;
-        $products = collect();
-        foreach($user->categories as $category){
-            if($count==2)break;
-            $products->push($category->products()->first()->load('category'));
-            $count++;
-        }
-        if($products->count()==0){
-            $products->push(Product::first()->load('category'));
-        }
+        
         return response([
-            'products'=>$products,
             'stores'=>Store::all()
-        ]);
+        ],200);
 
 
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -18,10 +19,16 @@ Route::middleware('auth:sanctum')->post('/categories',[CategoryController::class
 Route::middleware('auth:sanctum')->post('/logout',[LoginController::class,'destory']);
 
 //Home page
-Route::middleware('auth:sanctum')->get('/stores',[StoreController::class,'index']);
+Route::middleware('auth:sanctum')->get('/home/stores',[StoreController::class,'index']);
+Route::middleware('auth:sanctum')->get('/home/products',[ProductController::class,'homeProducts']);
 Route::middleware('auth:sanctum')->get('/stores/{id}/products',[ProductController::class,'index']);
 Route::middleware('auth:sanctum')->get('/stores/{id1}/products/{id2}',[ProductController::class,'show']);
 
 //Search page
 Route::middleware('auth:sanctum')->get('/search/stores',[StoreController::class,'search']);
 Route::middleware('auth:sanctum')->get('/search/products',[ProductController::class,'search']);
+
+//Favorites
+Route::middleware('auth:sanctum')->get('/favorites',[FavoriteController::class,'index']);
+Route::middleware('auth:sanctum')->delete('/favorites',[FavoriteController::class,'destory']);
+Route::middleware('auth:sanctum')->post('/favorites',[FavoriteController::class,'store']);

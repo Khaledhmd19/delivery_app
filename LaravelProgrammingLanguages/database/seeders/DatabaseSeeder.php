@@ -24,18 +24,17 @@ class DatabaseSeeder extends Seeder
 
         Store::factory(10)->create([
             'title' => fake()->title(),
-            'description' =>fake()->name(),
-            'location'=> fake()->name()
+            'description' =>fake()->text(50),
+            'location'=> fake()->text(50)
         ]);
         Product::factory(10)->create([
             'name'=>fake()->name(),
-            'description'=>fake()->name(),
+            'description'=>fake()->text(50),
             'image'=>'33',
             'price'=>443,
-            'stock'=> 4,
-            'store_id'=>1,
-            'category_id'=>2
-
+            'stock'=> random_int(100,200),
+            'store_id'=>random_int(1,6),
+            'category_id'=>random_int(1,3)
         ]);
 
     }
