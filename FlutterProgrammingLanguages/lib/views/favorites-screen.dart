@@ -5,7 +5,10 @@ import 'package:delivery_app/widgets/favoritesCard.dart';
 import 'package:get/get.dart';
 
 class Favorites extends StatelessWidget {
-  Favorites({super.key});
+  Favorites({
+    super.key,
+    
+  });
 
   final FavoritesController controller = Get.put(FavoritesController());
 
@@ -59,8 +62,7 @@ class Favorites extends StatelessWidget {
                           ? SelectedCategoryList(
                               categoryName: categories[index],
                             )
-                          : CategoryList(
-                              categoryName: categories[index]),
+                          : CategoryList(categoryName: categories[index]),
                     );
                   });
                 },
@@ -71,7 +73,7 @@ class Favorites extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Get.to(()=>MainScreen());
+                  Get.to(() => MainScreen());
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xffF87C47),

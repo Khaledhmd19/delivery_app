@@ -1,3 +1,4 @@
+import 'package:delivery_app/views/favorites_screen.dart';
 import 'package:delivery_app/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App',
-      home: MainScreen(),
+      home: FavoritesScreen(),
     );
   }
 }

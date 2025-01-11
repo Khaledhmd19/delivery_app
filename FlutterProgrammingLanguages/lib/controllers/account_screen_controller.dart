@@ -14,7 +14,7 @@ class AccountScreenController extends GetxController {
   }
 
   void navigateToPaymentCard() {
-    // Get.to(() => CreditCardInformationScreen());
+    Get.to(() => CreditCardInformationScreen());
   }
 
   void navigateToContactUs() {}

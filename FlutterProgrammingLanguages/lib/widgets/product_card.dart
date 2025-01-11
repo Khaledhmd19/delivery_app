@@ -1,22 +1,19 @@
+import 'package:delivery_app/controllers/product_card_controller.dart';
 import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 
-class ProductCard extends StatefulWidget {
-  const ProductCard({super.key});
+class ProductCard extends StatelessWidget {
+  ProductCard({super.key});
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
   final String _productName = 'iPhone 16 Pro';
   final String _productImageUrl = 'assets/iPhone_16_pro.png';
   final double _productPrice = 1200;
-  bool _isFavorite = false;
   final bool _isInStock = true;
+
+  final ProductController _productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -89,38 +86,36 @@ class _ProductCardState extends State<ProductCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isFavorite = !_isFavorite;
-                      });
-                    },
-                    icon: _isFavorite
-                        ? GradientIcon(
-                            offset: Offset(0, 0),
-                            icon: Icons.favorite,
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(255, 255, 141, 77),
-                                Color.fromARGB(255, 248, 124, 71),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                          )
-                        : GradientIcon(
-                            offset: Offset(0, 0),
-                            icon: Icons.favorite_border,
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(255, 255, 141, 77),
-                                Color.fromARGB(255, 248, 124, 71),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                          ),
-                  ),
+                  Obx(() => IconButton(
+                        onPressed: () {
+                          _productController.toggleFavorite();
+                        },
+                        icon: _productController.isFavorite.value
+                            ? GradientIcon(
+                                offset: Offset(0, 0),
+                                icon: Icons.favorite,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 255, 141, 77),
+                                    Color.fromARGB(255, 248, 124, 71),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              )
+                            : GradientIcon(
+                                offset: Offset(0, 0),
+                                icon: Icons.favorite_border,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 255, 141, 77),
+                                    Color.fromARGB(255, 248, 124, 71),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              ),
+                      )),
                   const SizedBox(height: 16),
                   Container(
                     height: 30,
