@@ -1,11 +1,13 @@
+import 'package:delivery_app/models/storeModel.dart';
 import 'package:delivery_app/views/store_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StoreCard extends StatelessWidget {
-  const StoreCard({super.key});
+  StoreCard({super.key, required this.store});
 
+  Stores store;
   final String storeName = 'Sony Electronics';
   final String storeImageUrl = 'assets/sony_electronics.jpg';
 

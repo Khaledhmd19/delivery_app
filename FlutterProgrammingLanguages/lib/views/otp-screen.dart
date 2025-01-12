@@ -1,4 +1,4 @@
-import 'package:delivery_app/controllers/otp_controller.dart';
+import 'package:delivery_app/controllers/OtpController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

@@ -1,11 +1,14 @@
-import 'package:delivery_app/controllers/prefrences_controller.dart';
+import 'package:delivery_app/controllers/FavoritesController.dart';
 import 'package:delivery_app/views/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:delivery_app/widgets/prefrence_card.dart';
+import 'package:delivery_app/widgets/favoritesCard.dart';
 import 'package:get/get.dart';
 
 class Favorites extends StatelessWidget {
-  Favorites({super.key});
+  Favorites({
+    super.key,
+    
+  });
 
   final FavoritesController controller = Get.put(FavoritesController());
 
@@ -19,8 +22,13 @@ class Favorites extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Color(0xffffffff),
+      appBar: AppBar(
+        backgroundColor: Color(0xffffffff),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         child: Column(
@@ -41,11 +49,8 @@ class Favorites extends StatelessWidget {
               height: 20.0,
             ),
             SizedBox(
-              height: 450,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
+              height: screenHeight * 0.6,
+              child: ListView.builder(
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   return GetBuilder<FavoritesController>(builder: (_) {
@@ -54,10 +59,10 @@ class Favorites extends StatelessWidget {
                         controller.toggleFavorites(categories[index]);
                       },
                       child: controller.isExist(categories[index])
-                          ? InterestedCategoriesSelected(
-                              name: categories[index],
+                          ? SelectedCategoryList(
+                              categoryName: categories[index],
                             )
-                          : InterestedCategories(name: categories[index]),
+                          : CategoryList(categoryName: categories[index]),
                     );
                   });
                 },

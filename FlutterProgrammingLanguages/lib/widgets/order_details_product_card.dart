@@ -1,4 +1,6 @@
+import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderDetailsProductCard extends StatefulWidget {
@@ -17,7 +19,9 @@ class _OrderDetailsProductCardState extends State<OrderDetailsProductCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => ProductDetailsScreen());
+      },
       child: Card(
         color: Colors.white,
         elevation: 0,

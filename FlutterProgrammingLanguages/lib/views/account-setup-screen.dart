@@ -1,11 +1,11 @@
-import 'package:delivery_app/controllers/account_setup_controller.dart';
+import 'package:delivery_app/controllers/accountSetupController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
 class AccountSetup extends StatelessWidget {
   AccountSetup({super.key});
-  final AccountSetupCotroller controller = Get.put((AccountSetupCotroller()));
+  final AccountSetupController controller = Get.put((AccountSetupController()));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class AccountSetup extends StatelessWidget {
                   key: controller.formKey,
                   child: Column(
                     children: [
-                      GetBuilder<AccountSetupCotroller>(builder: (_) {
+                      GetBuilder<AccountSetupController>(builder: (_) {
                         return TextFormField(
                           controller: controller.firstNameController,
                           decoration: InputDecoration(
@@ -72,14 +72,14 @@ class AccountSetup extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20.0))),
                               hintText: "First name",
-                              errorText: controller.errorFristName.value),
+                              errorText: controller.errorFirstName.value),
                           
                         );
                       }),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      GetBuilder<AccountSetupCotroller>(builder: (_) {
+                      GetBuilder<AccountSetupController>(builder: (_) {
                         return TextFormField(
                           controller: controller.lastNameController,
                           decoration: InputDecoration(
@@ -96,7 +96,7 @@ class AccountSetup extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      GetBuilder<AccountSetupCotroller>(builder: (_) {
+                      GetBuilder<AccountSetupController>(builder: (_) {
                         return TextFormField(
                           controller: controller.locationController,
                           decoration: InputDecoration(

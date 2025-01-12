@@ -1,3 +1,5 @@
+import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/show-store-service.dart';
 import 'package:delivery_app/views/favorites_screen.dart';
 import 'package:delivery_app/widgets/product_card.dart';
 import 'package:delivery_app/widgets/store_card.dart';
@@ -6,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:delivery_app/controllers/home_controller.dart'; 
+import 'package:delivery_app/controllers/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController controller = Get.put(HomeController());
+    final HomeController controller =
+        Get.put(HomeController()); // Initialize the controller
 
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -118,18 +121,29 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        if (index != 0) const SizedBox(height: 12),
-                        StoreCard(),
-                      ],
-                    );
-                  },
-                ),
-              )
+                child: FutureBuilder<List<Stores>?>(
+                    future: ShowStore().getStores(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<Stores> store = snapshot.data!;
+                        return ListView.builder(
+                          itemCount: store.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                if (index != 0) const SizedBox(height: 12),
+                                StoreCard(
+                                  store: store[index],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),
+              ),
             ],
           ),
         ),
