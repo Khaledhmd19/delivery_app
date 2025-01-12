@@ -14,7 +14,8 @@ class FavoriteController extends Controller
     }
     public function store($id){
         $user = Auth::user();
-        $user->favorites()->attach($id);
+        $user->favorites()->syncWithoutDetaching($id);
+        
     }
 
     public function destory($id){
