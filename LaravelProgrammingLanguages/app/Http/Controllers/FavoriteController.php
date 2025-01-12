@@ -12,15 +12,13 @@ class FavoriteController extends Controller
             'products'=> Auth::user()->favorites
         ]);
     }
-    public function store(){
+    public function store($id){
         $user = Auth::user();
-        $product = request()->all();
-        $user->favorites()->attach($product['id']);
+        $user->favorites()->attach($id);
     }
 
-    public function destory(){
+    public function destory($id){
         $user = Auth::user();
-        $product = request('product');
-        $user->favorites()->detach($product['id']);
+        $user->favorites()->detach($id);
     }
 }

@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->get('/search/products',[ProductController::cl
 
 //Favorites
 Route::middleware('auth:sanctum')->get('/favorites',[FavoriteController::class,'index']);
-Route::middleware('auth:sanctum')->delete('/favorites',[FavoriteController::class,'destory']);
-Route::middleware('auth:sanctum')->post('/favorites',[FavoriteController::class,'store']);
+Route::middleware('auth:sanctum')->delete('/favorites/{id}',[FavoriteController::class,'destory']);
+Route::middleware('auth:sanctum')->post('/favorites/{id}',[FavoriteController::class,'store']);
