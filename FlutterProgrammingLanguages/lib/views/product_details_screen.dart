@@ -1,16 +1,17 @@
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:delivery_app/models/product_model.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final Product product;
-
-  const ProductDetailsScreen({super.key, required this.product});
-
+  ProductDetailsScreen({super.key});
+   ProductsModel product = Get.arguments;
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -46,7 +47,7 @@ class ProductDetailsScreen extends StatelessWidget {
             children: [
               Center(
                 child: Image.asset(
-                  product.image ?? 'assets/placeholder.png',
+                  'assets/iPhone_16_pro.png',
                   width: 300,
                   height: 300,
                 ),
@@ -64,7 +65,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  '\$${product.price!.toStringAsFixed(2)}',
+                  "${product.price!}",
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -82,7 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                product.store!.title,
+                product.store!.title!,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

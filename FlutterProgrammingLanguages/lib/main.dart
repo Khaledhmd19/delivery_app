@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App',
-      home: PhoneNumber(),
+      home: MainScreen(),
       initialBinding: BindingsBuilder(() {
         Get.put(SearchScreenController());
       }),

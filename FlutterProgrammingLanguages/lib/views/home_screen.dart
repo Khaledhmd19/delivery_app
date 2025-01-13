@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:delivery_app/controllers/home_controller.dart';
+import 'package:delivery_app/controllers/home_controller.dart'; 
+
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -86,7 +88,13 @@ class HomeScreen extends StatelessWidget {
                     height: 130,
                     child: PageView(
                       controller: controller.pageController.value,
-                      children: [],
+                      children: [
+                        // ProductCard(),
+                        // ProductCard(),
+                        // ProductCard(),
+                        // ProductCard(),
+                        // ProductCard(),
+                      ],
                     ),
                   )),
               SizedBox(height: 8),
@@ -120,19 +128,20 @@ class HomeScreen extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         List<Stores> store = snapshot.data!;
-                        return ListView.builder(
-                          itemCount: store.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                if (index != 0) const SizedBox(height: 12),
-                                StoreCard(
-                                  store: store[index],
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        return  ListView.builder(
+                            itemCount: store.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  if (index != 0) const SizedBox(height: 12),
+                                  StoreCard(
+                                    store: store[index],
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        ;
                       } else {
                         return Center(child: CircularProgressIndicator());
                       }

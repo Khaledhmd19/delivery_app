@@ -135,7 +135,7 @@ class SearchScreen extends StatelessWidget {
                         itemCount: _searchController.products.length,
                         itemBuilder: (context, index) {
                           return ProductCard(
-                            product: _searchController.products[index],
+                            products: _searchController.products[index],
                           );
                         },
                       );

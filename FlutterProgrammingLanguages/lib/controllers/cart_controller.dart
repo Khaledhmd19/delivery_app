@@ -1,20 +1,43 @@
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  var cartItems = <String>["Product 1", "Product 2", "Product 3"].obs;
-  var totalAmount = 2400.0.obs;
+  List<ProductsModel> cartItems = [];
+  var totalAmount = 0.obs;
 
-  void addToCart(String product) {
-    cartItems.add(product);
-    updateTotal();
+  void addStoreToProduct(Stores store) {}
+
+  void addToCart(ProductsModel product) {
+    if (cartItems.contains(product)) {
+      if (product.stock! > product.productCount&&product.productCount>=0) {
+        product.productCount++;
+        totalAmount += product.price!;
+      }
+    } else {
+      cartItems.add(product);
+      totalAmount += product.price!;
+    }
   }
 
-  void removeFromCart(String product) {
+  void removeFromCart(ProductsModel product) {
+    if (cartItems.contains(product)) {
+      if (product.stock! >= 0&& product.productCount>0) {
+        product.productCount--;
+        totalAmount -= product.price!;
+      }
+    } else {
+      cartItems.remove(product);
+      totalAmount -= product.price!;
+    }
+    
+  }
+
+  void removeProduct(ProductsModel product) {
+    totalAmount -= product.price!*product.productCount;
+    product.productCount = 0;
     cartItems.remove(product);
-    updateTotal();
-  }
 
-  void updateTotal() {
-    totalAmount.value = cartItems.length * 800.0;
+    
   }
 }

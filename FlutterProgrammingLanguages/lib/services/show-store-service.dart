@@ -8,21 +8,20 @@ class ShowStore {
 
   Future<List<Stores>> getStores() async {
     try {
+      print(storage.getString("token"));
       var response = await dio.get(
         "home/stores",
         options: Options(
           headers: {
             'Authorization': "Bearer ${storage.getString("token")}",
-            'Accept': "application/json",
           },
         ),
       );
 
-      // Check if the response is successful
       if (response.statusCode == 200) {
         print('Request successful');
 
-        // Parse the response as a Map
+       
         Map<String, dynamic> responseData;
         if (response.data is String) {
           responseData = jsonDecode(response.data);
@@ -30,12 +29,11 @@ class ShowStore {
           responseData = response.data;
         }
 
-        // Extract the 'stores' array from the response
+       
         List<dynamic> data = responseData['stores'];
 
-        print(data); // Debugging: Print the raw data
-
-        // Convert JSON data to List<Stores>
+        print(data); 
+        
         List<Stores> stores = [];
         for (var i = 0; i < data.length; i++) {
           stores.add(Stores.fromJson(data[i]));
