@@ -19,7 +19,7 @@ class _ProductCardState extends State<CartProductCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => ProductDetailsScreen());
+        // Get.to(() => ProductDetailsScreen());
       },
       child: Dismissible(
         key: UniqueKey(),

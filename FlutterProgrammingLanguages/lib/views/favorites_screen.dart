@@ -48,7 +48,7 @@ class FavoritesScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      ProductCard(),
+                      // ProductCard(),
                     ],
                   );
                 },

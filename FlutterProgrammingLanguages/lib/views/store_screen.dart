@@ -67,14 +67,6 @@ class StoreScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            // Text(
-            //   'Description',
-            //   style: GoogleFonts.poppins(
-            //     fontSize: 16,
-            //     fontWeight: FontWeight.w500,
-            //     color: Color(0xff323232),
-            //   ),
-            // ),
             Text(
               'Products',
               style: GoogleFonts.poppins(
@@ -90,7 +82,7 @@ class StoreScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      ProductCard(),
+                      // ProductCard(),
                     ],
                   );
                 },

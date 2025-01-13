@@ -20,7 +20,7 @@ class _OrderDetailsProductCardState extends State<OrderDetailsProductCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => ProductDetailsScreen());
+        // Get.to(() => ProductDetailsScreen());
       },
       child: Card(
         color: Colors.white,

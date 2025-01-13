@@ -1,5 +1,6 @@
 import 'package:delivery_app/controllers/search_screen_controller.dart';
 import 'package:delivery_app/views/main_screen.dart';
+import 'package:delivery_app/views/phone-number-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App',
-      home: MainScreen(),
+      home: PhoneNumber(),
       initialBinding: BindingsBuilder(() {
         Get.put(SearchScreenController());
       }),

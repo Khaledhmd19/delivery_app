@@ -1,10 +1,10 @@
-import 'package:delivery_app/views/favorites_screen.dart';
-import 'package:delivery_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 import 'package:delivery_app/controllers/search_screen_controller.dart';
+import 'package:delivery_app/widgets/product_card.dart';
+import 'package:delivery_app/views/favorites_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   final SearchScreenController _searchController = Get.find();
@@ -101,21 +101,46 @@ class SearchScreen extends StatelessWidget {
                     ),
                     prefixIcon: IconButton(
                       icon: const Icon(Icons.search, color: Colors.grey),
-                      onPressed: () {},
+                      onPressed: () {
+                        _searchController.searchProducts(
+                          _searchController.searchController.text,
+                        );
+                      },
                     ),
                   ),
+                  onSubmitted: (query) {
+                    _searchController.searchProducts(query);
+                  },
                   onTap: () {
                     _searchController.checkKeyboardVisibility();
                   },
                 ),
                 const SizedBox(height: 5),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return ProductCard();
-                    },
-                  ),
+                  child: Obx(() {
+                    if (_searchController.isLoading.value) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (_searchController.products.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No products found',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: Color(0xffB2B2B2),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return ListView.builder(
+                        itemCount: _searchController.products.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: _searchController.products[index],
+                          );
+                        },
+                      );
+                    }
+                  }),
                 ),
               ],
             ),

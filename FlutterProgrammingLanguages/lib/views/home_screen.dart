@@ -86,13 +86,7 @@ class HomeScreen extends StatelessWidget {
                     height: 130,
                     child: PageView(
                       controller: controller.pageController.value,
-                      children: [
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                      ],
+                      children: [],
                     ),
                   )),
               SizedBox(height: 8),

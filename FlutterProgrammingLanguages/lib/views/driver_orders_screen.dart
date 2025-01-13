@@ -1,4 +1,5 @@
 import 'package:delivery_app/views/favorites_screen.dart';
+import 'package:delivery_app/widgets/driver_order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +45,9 @@ class DriverOrdersScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
+          children: [
+            DriverOrderCard(),
+          ],
         ),
       ),
     );

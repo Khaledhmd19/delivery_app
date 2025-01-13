@@ -13,6 +13,7 @@ class ShowStore {
         options: Options(
           headers: {
             'Authorization': "Bearer ${storage.getString("token")}",
+            'Accept': "application/json",
           },
         ),
       );
