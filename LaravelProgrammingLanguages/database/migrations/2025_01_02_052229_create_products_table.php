@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('assets/iPhone_16_pro.png');
             $table->integer('price');
             $table->integer('stock');
             $table->foreignIdFor(Category::class);

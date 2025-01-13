@@ -1,3 +1,4 @@
+import 'package:delivery_app/widgets/store_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String dropDownValue = _searchController.selectedOption.value;
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -60,7 +62,7 @@ class SearchScreen extends StatelessWidget {
                     onChanged: (String? newValue) {
                       _searchController.updateSelectedOption(newValue);
                     },
-                    items: <String>['Product', 'Store']
+                    items: <String>['Products', 'Stores']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -102,14 +104,26 @@ class SearchScreen extends StatelessWidget {
                     prefixIcon: IconButton(
                       icon: const Icon(Icons.search, color: Colors.grey),
                       onPressed: () {
-                        _searchController.searchProducts(
-                          _searchController.searchController.text,
-                        );
+                        if (_searchController.selectedOption.value ==
+                            'Products') {
+                          _searchController.searchProducts(
+                            _searchController.searchController.text,
+                          );
+                        } else {
+                          _searchController.searchStores(
+                            _searchController.searchController.text,
+                          );
+                        }
                       },
                     ),
                   ),
                   onSubmitted: (query) {
-                    _searchController.searchProducts(query);
+                    print(_searchController.selectedOption.value);
+                    if (_searchController.selectedOption.value == 'Stores') {
+                      _searchController.searchStores(query);
+                    } else {
+                      _searchController.searchProducts(query);
+                    }
                   },
                   onTap: () {
                     _searchController.checkKeyboardVisibility();
@@ -120,7 +134,7 @@ class SearchScreen extends StatelessWidget {
                   child: Obx(() {
                     if (_searchController.isLoading.value) {
                       return Center(child: CircularProgressIndicator());
-                    } else if (_searchController.products.isEmpty) {
+                    } else if (_searchController.getDropDownValue().isEmpty) {
                       return Center(
                         child: Text(
                           'No products found',
@@ -132,11 +146,15 @@ class SearchScreen extends StatelessWidget {
                       );
                     } else {
                       return ListView.builder(
-                        itemCount: _searchController.products.length,
+                        itemCount: _searchController.getDropDownValue().length,
                         itemBuilder: (context, index) {
-                          return ProductCard(
-                            products: _searchController.products[index],
-                          );
+                          return _searchController.selectedOption.value ==
+                                  "Products"
+                              ? ProductCard(
+                                  products: _searchController
+                                      .getDropDownValue()[index],
+                                )
+                              : StoreCard(store: _searchController.stores.value[index]);
                         },
                       );
                     }

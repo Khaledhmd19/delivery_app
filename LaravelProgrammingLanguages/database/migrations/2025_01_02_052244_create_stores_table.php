@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('assets/iPhone_16_pro.png');
             $table->string('location');
             $table->timestamps();
         });

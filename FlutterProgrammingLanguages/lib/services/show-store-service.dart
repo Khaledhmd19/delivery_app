@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:delivery_app/main.dart';
+import 'package:delivery_app/models/ProductsModel.dart';
 import 'package:delivery_app/models/storeModel.dart';
 import 'package:dio/dio.dart';
 
@@ -21,7 +22,6 @@ class ShowStore {
       if (response.statusCode == 200) {
         print('Request successful');
 
-       
         Map<String, dynamic> responseData;
         if (response.data is String) {
           responseData = jsonDecode(response.data);
@@ -29,11 +29,10 @@ class ShowStore {
           responseData = response.data;
         }
 
-       
         List<dynamic> data = responseData['stores'];
 
-        print(data); 
-        
+        print(data);
+
         List<Stores> stores = [];
         for (var i = 0; i < data.length; i++) {
           stores.add(Stores.fromJson(data[i]));
@@ -55,6 +54,27 @@ class ShowStore {
         print('Unexpected error: $e');
       }
       return [];
+    }
+  }
+
+  Future<List<Stores>> searchStores(String query) async {
+    try {
+      dio.options.headers['Authorization'] =
+          'Bearer ${storage.getString('token')}';
+      dio.options.headers['Accept'] = 'application/json';
+      final response = await dio.get(
+        'http://10.0.2.2:8000/api/search/stores',
+        queryParameters: {'query': query},
+      );
+      print(query);
+      if (response.statusCode == 200) {
+        final data = response.data['stores'] as List<dynamic>;
+        return data.map((json) => Stores.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load search results');
+      }
+    } catch (e) {
+      throw Exception('Failed to load search results: $e');
     }
   }
 }
