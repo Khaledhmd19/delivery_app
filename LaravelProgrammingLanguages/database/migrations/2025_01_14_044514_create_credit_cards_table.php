@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('credit_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('location');
-            $table->enum('status',['Waiting for a driver','On the way','Delivered','Canceled']);
-            $table->foreignIdFor(User::class,'user_id');
-            $table->foreignIdFor(User::class,'driver_id')->nullable();
+            $table->string('card_number');
+            $table->string('ccv');
+            $table->string('holder_name');
+            $table->string('expiration_date');
+            $table->foreignIdFor(User::class);
+
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('credit_cards');
     }
 };

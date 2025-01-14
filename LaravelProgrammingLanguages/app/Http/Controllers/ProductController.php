@@ -16,7 +16,6 @@ class ProductController extends Controller
     }
     public function homeProducts(){
         $user=Auth::user();
-        $user->load('categories');
         $count =0;
         $products = collect();
         $categories = $user->categories;

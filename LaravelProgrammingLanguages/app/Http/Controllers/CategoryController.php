@@ -16,20 +16,15 @@ class CategoryController extends Controller
     
     public function store(){
         $user = Auth::user();
-        $user->load('categories');
-        if($user->categories()->first()!=null){
-            return response([
-                'message'=>'Unauthorized action'
-            ],401);
-        }
+
         $categories = request()->all();
         
         foreach($categories as $category){
-            $user->categories()->attach($category['id']);
+            $user->categories()->syncWithoutDetaching($category['id']);
         }
         return response([
             'message'=>'Categories added successfully'
-        ],200);
+        ],201);
 
     }
 }
