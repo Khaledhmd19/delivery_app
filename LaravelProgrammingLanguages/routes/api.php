@@ -51,8 +51,9 @@ Route::middleware('auth:sanctum')->post('/profile/credit-card',[CreditCardContro
 Route::middleware('auth:sanctum')->get('/profile',[ProfileController::class,'index']);
 Route::middleware('auth:sanctum')->put('/profile',[ProfileController::class,'update']);
 //Driver endpoints
-Route::middleware('auth:sanctum')->get('/driver/pending',[DriverController::class,'getPendingOrders']);
-Route::middleware('auth:sanctum')->put('/orders/{id}/pick',[DriverController::class,'pickOrder']);
-Route::middleware('auth:sanctum')->put('/orders/{id}/confirm',[DriverController::class,'confirmOrder']);
-Route::middleware('auth:sanctum')->get('/driver/orders',[DriverController::class,'getDriverOrders']);
+
+Route::middleware(['driver'])->get('/driver/pending',[DriverController::class,'getPendingOrders']);
+Route::middleware(['driver'])->put('/orders/{id}/pick',[DriverController::class,'pickOrder']);
+Route::middleware(['driver'])->put('/orders/{id}/confirm',[DriverController::class,'confirmOrder']);
+Route::middleware(['driver'])->get('/driver/orders',[DriverController::class,'getDriverOrders']);
 

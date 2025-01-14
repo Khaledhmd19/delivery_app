@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
-            $table->string('image')->nullable()->default('assets/iPhone_16_pro.png');
+            $table->text('description');
+            $table->string('image')->nullable()->default('images/default.png');
             $table->string('location');
             $table->timestamps();
         });

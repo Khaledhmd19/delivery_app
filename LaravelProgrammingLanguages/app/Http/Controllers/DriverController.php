@@ -26,7 +26,7 @@ class DriverController extends Controller
         if($lastOrder!=null && $lastOrder->status!='Delivered'){
             return response([
                 'message'=> 'Deliver your order first :)'
-            ],403);
+            ],401);
         }
         $order->update([
             'driver_id' => Auth::user()->id,
@@ -43,12 +43,12 @@ class DriverController extends Controller
         if($order->driver_id != Auth::user()->id){
             return response([
                 'message'=>'Pick an order first'
-            ],403);
+            ],401);
         }
         if($order->status!= 'On the way'){
             return response([
                 'message'=>'unauthroized'
-            ],403);
+            ],401);
         }
         $order->update([
             'status' => 'Delivered'
