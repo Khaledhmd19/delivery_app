@@ -24,6 +24,7 @@ class ProductsModel {
   String? updatedAt;
   Stores? store;
   int productCount=1;
+  bool isFavorite=false; 
 
   ProductsModel(
       {this.id,

@@ -1,3 +1,4 @@
+import 'package:delivery_app/models/ProductsModel.dart';
 import 'package:delivery_app/widgets/main_button.dart';
 import 'package:delivery_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({super.key});
+  FavoritesScreen({super.key});
+  List<ProductsModel> favoritesproducts = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +46,11 @@ class FavoritesScreen extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: 5,
+                itemCount: favoritesproducts.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      // ProductCard(),
-                    ],
-                  );
+                  return  ProductCard(products: favoritesproducts[index]);
+                        
+                    
                 },
               ),
             ),
