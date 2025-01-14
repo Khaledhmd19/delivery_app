@@ -41,6 +41,16 @@ return [
             'journal_mode' => null,
             'synchronous' => null,
         ],
+        'real_items' => [
+            'driver' => 'sqlite',
+            'url' => env('DB_URL'),
+            'database' => env('DB_DATABASE', database_path('real_items.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'busy_timeout' => null,
+            'journal_mode' => null,
+            'synchronous' => null,
+        ],
 
         'mysql' => [
             'driver' => 'mysql',

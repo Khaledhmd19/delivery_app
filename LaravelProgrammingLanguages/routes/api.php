@@ -6,6 +6,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StoreController;
 use App\Models\Category;
@@ -44,3 +45,7 @@ Route::middleware('auth:sanctum')->delete('/orders/{id}',[OrderController::class
 //Credit card
 Route::middleware('auth:sanctum')->get('/profile/credit-card',[CreditCardController::class,'index']);
 Route::middleware('auth:sanctum')->post('/profile/credit-card',[CreditCardController::class,'store']);
+
+//Profile
+Route::middleware('auth:sanctum')->get('/profile',[ProfileController::class,'index']);
+Route::middleware('auth:sanctum')->put('/profile',[ProfileController::class,'update']);
