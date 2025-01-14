@@ -87,16 +87,9 @@ class OrderController extends Controller
 
     }
     public function destroy($id){
-        $order = Order::findOrFail($id);
-        if(Auth::user()->id!=$order->user_id){
-            return response([
-                'message'=>'Unauthorized'
-            ],401);
-        }
+        $order = Auth::user()->orders()->find($id);
         if($order->status =='Waiting for a driver'){
-            $order->update([
-                'status'=>'Canceled'
-            ]);
+            $order->delete();
             return response([
                 'message'=>'Order canceled'
             ],200);

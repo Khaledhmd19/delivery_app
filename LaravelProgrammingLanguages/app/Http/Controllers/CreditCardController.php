@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class CreditCardController extends Controller
 {
     public function show(){
-        $credit = Auth::user()->credit;
+        $credit = Auth::user()->creditCard;
         return response([
             'creditCard'=>$credit
         ]);

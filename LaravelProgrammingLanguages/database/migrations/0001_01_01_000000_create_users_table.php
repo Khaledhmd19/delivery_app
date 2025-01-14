@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('otp')->nullable();
             $table->timestamp('otp_timestamp')->nullable();
             $table->enum('role',['user','admin','driver']);
-            $table->foreignIdFor(CreditCard::class)->nullable();
             $table->timestamps();
         });
         Schema::create('sessions', function (Blueprint $table) {

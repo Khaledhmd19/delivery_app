@@ -17,6 +17,7 @@ class ProfileController extends Controller
             'last_name'=>['required'],
             'location'=>['required'],
         ]);
-        Auth::user()->update([$attributes,request('image')]);
+    
+        Auth::user()->update(request()->all());
     }
 }

@@ -3,15 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function index($id){
-        $store = Store::with('products')->findorFail($id);
-        return response([
-            'store'=>$store,
+        $store = Store::findorFail($id);
+        $products = collect();
+        foreach($store->products as $product){
+            $is_favorite = false;
+            if(Auth::user()->favorites()->find($product->id)!=null){
+                $is_favorite=true;
+            }
+            $products->push([
+                'id'=> $product->id,
+                'name'=>$product->name,
+                'description'=>$product->description,
+                'image'=>$product->imgae,
+                'price'=>$product->price,
+                'stock'=>$product->stock,
+                'category'=>$product->category_id,
+                'is_favorite'=>$is_favorite
+            ]);
+        
+        }
+        return response(content: [
+            'store'=>[
+                'id'=>$store->id,
+                'title'=>$store->title,
+                'description'=>$store->description,
+                'products'=>$products
+            ]
         ]);
     }
     public function homeProducts(){
@@ -22,12 +46,41 @@ class ProductController extends Controller
         $categories = $categories->shuffle();
         foreach($categories as $category){
             if($count==2)break;
-            $products->push($category->products()->inRandomOrder()->first()->load('category'));
+            $is_favorite=false;
+            $product = $category->products()->inRandomOrder()->first()->load('category');
+            if(Auth::user()->favorites()->find($product->id)!=null){
+                $is_favorite=true;
+            }
+            $products->push([
+                'id'=> $product->id,
+                'name'=>$product->name,
+                'description'=>$product->description,
+                'image'=>$product->imgae,
+                'price'=>$product->price,
+                'stock'=>$product->stock,
+                'category'=>$product->category_id,
+                'is_favorite'=>$is_favorite
+            ]);
             $count++;
         }
 
         if($products->count()==0){
-            $products->push(Product::inRandomOrder()->first()->load('category'));
+            $is_favorite=false;
+
+            $product = Product::inRandomOrder()->first()->load('category');
+            if(Auth::user()->favorites()->find($product->id)!=null){
+                $is_favorite=true;
+            }
+            $products->push([
+                'id'=> $product->id,
+                'name'=>$product->name,
+                'description'=>$product->description,
+                'image'=>$product->imgae,
+                'price'=>$product->price,
+                'stock'=>$product->stock,
+                'category'=>$product->category_id,
+                'is_favorite'=>$is_favorite
+            ]);
         }
         return response([
             'products'=>$products

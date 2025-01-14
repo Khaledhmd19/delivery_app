@@ -33,10 +33,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Category::class);
     }
     public function ordersToDeliver(){
-        if($this->role == 'driver'){
+        //if($this->role == 'driver'){
             return $this->hasMany(Order::class,'driver_id');
-        }
-        return collect();
+        //}
+        //return collect();
     }
 
     public function creditCard(){
