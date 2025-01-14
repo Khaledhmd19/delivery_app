@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CreditCardController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StoreController;
@@ -32,3 +35,20 @@ Route::middleware('auth:sanctum')->get('/search/products',[ProductController::cl
 Route::middleware('auth:sanctum')->get('/favorites',[FavoriteController::class,'index']);
 Route::middleware('auth:sanctum')->delete('/favorites/{id}',[FavoriteController::class,'destory']);
 Route::middleware('auth:sanctum')->post('/favorites/{id}',[FavoriteController::class,'store']);
+
+//Order
+Route::middleware('auth:sanctum')->get('/orders',[OrderController::class,'index']);
+Route::middleware('auth:sanctum')->get('/orders/{id}',[OrderController::class,'show']);
+Route::middleware('auth:sanctum')->post('/orders',[OrderController::class,'store']);
+Route::middleware('auth:sanctum')->delete('/orders/{id}',[OrderController::class,'destroy']);
+
+//Credit card
+Route::middleware('auth:sanctum')->get('/profile/credit-card',[CreditCardController::class,'index']);
+Route::middleware('auth:sanctum')->post('/profile/credit-card',[CreditCardController::class,'store']);
+
+//Driver endpoints
+Route::middleware('auth:sanctum')->get('/orders/pending',[DriverController::class,'getPendingOrders']);
+Route::middleware('auth:sanctum')->get('/orders/{id}/pick',[DriverController::class,'pickOrder']);
+Route::middleware('auth:sanctum')->post('/orders/{id}/confirm',[DriverController::class,'confirmOrder']);
+Route::middleware('auth:sanctum')->delete('/driver/orders',[DriverController::class,'getDriverOrders']);
+Route::middleware('auth:sanctum')->delete('/validate-credit-card',[DriverController::class,'validateCreditCard']);

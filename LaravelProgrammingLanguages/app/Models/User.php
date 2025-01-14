@@ -39,6 +39,10 @@ class User extends Authenticatable
         return collect();
     }
 
+    public function creditCard(){
+        return $this->hasOne(CreditCard::class);
+    }
+
 
     
 
