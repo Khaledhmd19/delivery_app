@@ -12,7 +12,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartController controller = Get.put(CartController());
+    final CartController controller = Get.find<CartController>();
 
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -49,17 +49,17 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Obx(() => ListView.builder(
-                  itemCount: controller.cartItems.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        if (index != 0) const SizedBox(height: 0),
-                        CartProductCard(),
-                      ],
-                    );
-                  },
-                )),
+            child: ListView.builder(
+              itemCount: controller.cartItems.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    if (index != 0) const SizedBox(height: 0),
+                    CartProductCard(product: controller.cartItems[index],),
+                  ],
+                );
+              },
+            ),
           ),
           const SizedBox(height: 8),
           Padding(

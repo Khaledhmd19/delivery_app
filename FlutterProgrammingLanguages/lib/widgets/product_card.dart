@@ -1,4 +1,8 @@
+import 'package:delivery_app/controllers/cart_controller.dart';
 import 'package:delivery_app/controllers/product_card_controller.dart';
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,20 +10,25 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 
 class ProductCard extends StatelessWidget {
-  ProductCard({super.key});
-
-  final String _productName = 'iPhone 16 Pro';
-  final String _productImageUrl = 'assets/iPhone_16_pro.png';
-  final double _productPrice = 1200;
-  final bool _isInStock = true;
+  ProductCard({super.key, required this.products, this.store});
+  ProductsModel products;
+  Stores? store;
 
   final ProductController _productController = Get.put(ProductController());
+  final CartController controller = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
+    final String? _productName = products.name;
+    final String? _productImageUrl = 'assets/iPhone_16_pro.png';
+    final int? _productPrice = products.price;
+    final bool _isInStock = products.stock! > 0;
+
     return GestureDetector(
-      onTap: () {
-        Get.to(() => ProductDetailsScreen());
+      onTap: () async {
+        ProductsModel? productsModel =
+            await ShowProduct().getproductsDetails(store!.id!, products.id!);
+        Get.to(() => ProductDetailsScreen(), arguments: productsModel);
       },
       child: Card(
         color: Colors.white,
@@ -39,7 +48,7 @@ class ProductCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  _productImageUrl,
+                  _productImageUrl!,
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
@@ -53,7 +62,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      _productName,
+                      _productName!,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -72,7 +81,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 28),
                     Text(
-                      '\$${_productPrice.toStringAsFixed(2)}',
+                      '\$${_productPrice}',
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -127,7 +136,10 @@ class ProductCard extends StatelessWidget {
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: () {
+                        products.store = store;
+                        controller.addToCart(products);
+                      },
                       icon: const Icon(Icons.add),
                     ),
                   ),

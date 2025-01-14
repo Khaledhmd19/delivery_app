@@ -1,13 +1,20 @@
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StoreScreen extends StatelessWidget {
-  const StoreScreen({super.key});
+  StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    Map<String, dynamic> args = Get.arguments;
+    Stores store = args['store'];
+
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -24,7 +31,7 @@ class StoreScreen extends StatelessWidget {
         backgroundColor: Color(0xffffffff),
         centerTitle: true,
         title: Text(
-          'Store Name',
+          store.title!,
           style: GoogleFonts.poppins(
             color: Color(0xff323232),
             fontWeight: FontWeight.bold,
@@ -42,7 +49,7 @@ class StoreScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ksdagf asdkghksa gaskjghsakd ghks ksagh ksdag skad gsa gskadg hsdkjg skdaghksadhg gskadg hsdkjg skdaghksadhg.',
+              store.description!,
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -59,7 +66,7 @@ class StoreScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Store, Location',
+              store.location!,
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -85,16 +92,25 @@ class StoreScreen extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      ProductCard(),
-                    ],
-                  );
-                },
-              ),
+              child: FutureBuilder(
+                  future: ShowProduct().getproducts(store.id!),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<ProductsModel> products = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ProductCard(products: products[index],store: store,),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }),
             ),
             const SizedBox(height: 55),
           ],

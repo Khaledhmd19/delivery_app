@@ -1,15 +1,21 @@
+import 'package:delivery_app/controllers/cart_controller.dart';
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CartProductCard extends StatefulWidget {
-  const CartProductCard({super.key});
-
+   CartProductCard({super.key,this.product});
+  ProductsModel? product;
   @override
   State<CartProductCard> createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<CartProductCard> {
+
+   
   final String _productName = 'iPhone 16 Pro';
   final String _productImageUrl = 'assets/iPhone_16_pro.png';
   final double _productPrice = 1200;
@@ -17,9 +23,11 @@ class _ProductCardState extends State<CartProductCard> {
 
   @override
   Widget build(BuildContext context) {
+    final CartController controller = Get.find<CartController>();
     return GestureDetector(
-      onTap: () {
-        Get.to(() => ProductDetailsScreen());
+      onTap: () async {
+         ProductsModel? productsModel = await ShowProduct().getproductsDetails(widget.product!.store!.id!, widget.product!.id!);
+        Get.to(() => ProductDetailsScreen(),arguments: productsModel);
       },
       child: Dismissible(
         key: UniqueKey(),
@@ -90,7 +98,7 @@ class _ProductCardState extends State<CartProductCard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            _productName,
+                            widget.product!.name!,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -99,7 +107,7 @@ class _ProductCardState extends State<CartProductCard> {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {controller.removeProduct(widget.product!);},
                             icon: Icon(
                               Icons.close_rounded,
                               color: Color(0xffD9D9D9),
@@ -122,7 +130,7 @@ class _ProductCardState extends State<CartProductCard> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 setState(() {
-                                  _productCount--;
+                                  controller.removeFromCart(widget.product!);
                                 });
                               },
                               icon: Icon(
@@ -133,7 +141,7 @@ class _ProductCardState extends State<CartProductCard> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            '$_productCount',
+                            '${widget.product!.productCount}',
                             style: TextStyle(
                               color: Color(0xff323232),
                               fontSize: 16,
@@ -154,7 +162,7 @@ class _ProductCardState extends State<CartProductCard> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 setState(() {
-                                  _productCount++;
+                                 controller.addToCart(widget.product!);
                                 });
                               },
                               icon: Icon(
@@ -165,7 +173,7 @@ class _ProductCardState extends State<CartProductCard> {
                           ),
                           Spacer(),
                           Text(
-                            '\$${_productPrice * _productCount}',
+                            '\$${widget.product!.price!*widget.product!.productCount}',
                             style: TextStyle(
                               color: Color(0xff323232),
                               fontSize: 16,

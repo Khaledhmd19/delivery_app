@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
 class StoreCard extends StatelessWidget {
   StoreCard({super.key, required this.store});
 
@@ -13,9 +15,13 @@ class StoreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(store.id);
+    
     return GestureDetector(
       onTap: () {
-        Get.to(StoreScreen());
+        Get.to(() => StoreScreen(), arguments: {
+          'store': store
+        });
       },
       child: Container(
         height: 140,
@@ -53,7 +59,7 @@ class StoreCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Text(
-                  storeName,
+                  store.title!,
                   style: GoogleFonts.poppins(
                     color: Color(0xffffffff),
                     fontWeight: FontWeight.w700,

@@ -1,13 +1,17 @@
+import 'package:delivery_app/models/ProductsModel.dart';
+import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
-
+  ProductDetailsScreen({super.key});
+   ProductsModel product = Get.arguments;
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -51,7 +55,7 @@ class ProductDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               Center(
                 child: Text(
-                  'iPhone 16 pro',
+                  product.name!,
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -61,7 +65,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  '\$1200',
+                  "${product.price!}",
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -79,7 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'Apple store',
+                product.store!.title!,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -96,7 +100,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'ksdagf asdkghksa gaskjghsakd ghks ksagh ksdag skad gsa gskadg hsdkjg skdaghksadhg ksdagf asdkghksa gaskjghsakd ghks ksagh ksdag skad gsa gskadg hsdkjg skdaghksadhg',
+                product.description!,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

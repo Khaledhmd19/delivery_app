@@ -1,3 +1,4 @@
+import 'package:delivery_app/controllers/cart_controller.dart';
 import 'package:delivery_app/views/cart_screen.dart';
 import 'package:delivery_app/views/driver_orders_screen.dart';
 import 'package:delivery_app/views/home_screen.dart';
@@ -15,6 +16,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MainScreenController controller = Get.put(MainScreenController());
+    final CartController cartController = Get.put(CartController());
 
     final List<Widget> pages = [
       HomeScreen(),
