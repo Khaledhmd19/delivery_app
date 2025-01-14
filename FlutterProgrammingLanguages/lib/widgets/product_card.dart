@@ -2,6 +2,7 @@ import 'package:delivery_app/controllers/cart_controller.dart';
 import 'package:delivery_app/controllers/product_card_controller.dart';
 import 'package:delivery_app/models/ProductsModel.dart';
 import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/favorite_service.dart';
 import 'package:delivery_app/services/show-product-service.dart';
 import 'package:delivery_app/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -95,11 +96,17 @@ class ProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Obx(() => IconButton(
+                  IconButton(
                         onPressed: () {
-                          _productController.toggleFavorite();
+                          if (products.isFavorite) {
+                            products.isFavorite = false; 
+                           var request = FavoriteService().deletFavorite(products.id!);
+                          }else{
+                             products.isFavorite = true; 
+                           var request = FavoriteService().postFavorite(products.id!);
+                          }
                         },
-                        icon: _productController.isFavorite.value
+                        icon: products.isFavorite
                             ? GradientIcon(
                                 offset: Offset(0, 0),
                                 icon: Icons.favorite,
@@ -124,7 +131,7 @@ class ProductCard extends StatelessWidget {
                                   end: Alignment.bottomCenter,
                                 ),
                               ),
-                      )),
+                      ),
                   const SizedBox(height: 16),
                   Container(
                     height: 30,

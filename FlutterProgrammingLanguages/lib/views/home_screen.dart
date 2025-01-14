@@ -1,4 +1,6 @@
+import 'package:delivery_app/models/ProductsModel.dart';
 import 'package:delivery_app/models/storeModel.dart';
+import 'package:delivery_app/services/favorite_service.dart';
 import 'package:delivery_app/services/show-store-service.dart';
 import 'package:delivery_app/views/favorites_screen.dart';
 import 'package:delivery_app/widgets/product_card.dart';
@@ -49,8 +51,9 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(FavoritesScreen());
+            onPressed: ()async {
+              List<ProductsModel> response = await FavoriteService().getFavorite();
+              Get.to(()=>FavoritesScreen(),arguments: response);
             },
             icon: GradientIcon(
               offset: Offset(0, 0),
