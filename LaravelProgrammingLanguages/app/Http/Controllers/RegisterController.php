@@ -74,6 +74,7 @@ class RegisterController extends Controller
             'first_name' => ['required'],
             'last_name'=>['required'],
             'location' => ['required'],
+            'image'=>['image','mimes:jpeg,png,jpg','max:2048']
         ]);
         $number = request('number');
         if(strlen($number)==10){
@@ -94,6 +95,7 @@ class RegisterController extends Controller
                 'message' => 'Invalid credentials'
             ],401);
         }
+        
 
 
         if($user->first_name != null){
@@ -102,7 +104,12 @@ class RegisterController extends Controller
                 'message' => 'This number is already registerd.'
             ],401);
         }
-
+        if(request()->hasFile('image')){
+            $imageName =time().'.'.request('image')->getClientOriginalName(); 
+            request('image')->move(public_path('images'),$imageName);
+            $imagePath = 'images/'.$imageName;
+            $user->update(['image'=>$imagePath]);
+        }
         $user->update([
             'first_name'=>request('first_name'),
             'last_name'=>request('last_name'),

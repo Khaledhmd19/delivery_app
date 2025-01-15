@@ -10,8 +10,23 @@ class OrderController extends Controller
 {
     public function index(){
         $orders = Auth::user()->orders;
+        $ordersCollection = collect();
+        foreach($orders as $order){
+            $total=0;
+            foreach($order->products as $product){
+                $total += $product->pivot->price*$product->pivot->quantity;
+            }
+            $ordersCollection->push([
+                'id'=> $order->id,
+                'location'=>$order->location,
+                'status'=>$order->status,
+                'user_id'=>$order->user_id,
+                'driver_id'=>$order->driver_id,
+                'total'=>$total
+            ]);
+        }
         return response([
-            'orders'=>$orders
+            'orders'=>$ordersCollection
         ]);
     }
     public function show($id){
@@ -19,11 +34,8 @@ class OrderController extends Controller
         $products = $order->products;
         $productsCollection = collect();
         $orderCollection = collect();
-        $orderCollection->push([
-            "id"=> $order->id,
-            "location"=>$order->location,
-            'status'=> $order->status,
-        ]);
+        
+        $total=0;
         foreach($products as $product){
             $productsCollection->push([
                 'id'=> $product->id,
@@ -37,10 +49,18 @@ class OrderController extends Controller
                     'title'=>$product->store->title
                 ]
             ]);
+            $total += $product->pivot->price*$product->pivot->quantity;
         }
+        $orderCollection->push([
+            "id"=> $order->id,
+            "location"=>$order->location,
+            'status'=> $order->status,
+            'total'=>$total
+        ]);
         return([
             'order'=>$orderCollection,
-            'products'=>$productsCollection
+            'products'=>$productsCollection,
+    
         ]);
     }
 
